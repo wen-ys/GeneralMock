@@ -1,4 +1,4 @@
-# Basic Mock
+# General Mock
 Basically return 'Status code 200 / OK' regarding ALL requests without custom setting.
 
 ## Mock custom configuration
@@ -6,24 +6,50 @@ Basically return 'Status code 200 / OK' regarding ALL requests without custom se
 - path: Path for custom routing
 - filters: Set filter for custom effect
   - DelayFilter : This filter can make delay before response with delayTime option.
+  - HeaderFilter : This filter can add header values on response.
 - response:
   - code : custom response code
   - body : custom body data
+
 ```yml
-  - path: "/v1/greeting"
-    filters:
-      - type: "DelayFilter"
-        args: |
+    - path: "/books/1"
+      filters:
+        - type: "DelayFilter"
+          args: |
+            {
+              "delayTime" : 2000,
+              "deltaTime": 1000
+            }
+      response:
+        code: 200
+        body: "Good"
+        
+    - path: "/books/2"
+      filters:
+        - type: "HeaderFilter"
+          args: |
+            {
+              "responseHeader" : "test"
+            }
+      response:
+        code: 200
+        body: |
           {
-            "delayTime": 2000
+            "title" : "queen"
           }
 
-    response:
-      code: 200
-      body: |
-        {
-          "id" : "say",
-          "name" : "Hello"
-        }
+    - path: "/test/404"
+      response:
+        code: 404
+        body: "Not Found"
+
+    - path: "/test/500"
+      response:
+        code: 500
+        body: "Internal error"
+
+    - path: "/test/ok"
+      response:
+        code: 200
+        body: "ok"
 ```
-# GeneralMock
