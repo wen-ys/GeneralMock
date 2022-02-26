@@ -1,0 +1,36 @@
+
+routingPolicies:
+  - path: "/books/1"
+    filters:
+      - type: "DelayFilter"
+        args: |
+          {
+            "delayTime" : 2000,
+            "deltaTime": 1000
+          }
+    response:
+      code: 200
+      body: "Good"
+
+  - path: "/books/2"
+    filters:
+      - type: "HeaderFilter"
+        args: |
+          {
+            "responseHeader" : "test"
+          }
+    response:
+      code: 200
+      body: |
+        {
+          "title" : "queen"
+        }
+
+  - path: "/test/local"
+    response:
+      code: 200
+      body: |
+        {
+          "id" : "This is",
+          "name" : "Local"
+        }
