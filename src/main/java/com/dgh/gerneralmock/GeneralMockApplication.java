@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
-public class GenernalMockApplication {
+public class GeneralMockApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GenernalMockApplication.class, args);
+        SpringApplication.run(GeneralMockApplication.class, args);
     }
 }
