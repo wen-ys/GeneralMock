@@ -22,11 +22,9 @@ jobs:
       with:
         username: ${{ secrets.docker_hub_id }}
         password: ${{ secrets.docker_hub_token }}
-    - name: Get the tag name
-      run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
     - name: Build the Docker image
       run: |
-        echo $TAG
+        export TAG=$(git describe --tags --abbrev=0)
         docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
       run: docker push wenys/generalmock:${TAG}
