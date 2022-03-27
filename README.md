@@ -3,7 +3,7 @@ Basically return 'Status code 200 / OK' regarding ALL requests without custom se
 
 ## Mock run with custom option file
 ```shell
-docker run --mount type=bind,source=/{absolute path}/routing_config.yml,target=/service/routing_rule.yml -p 8100:8100 generalmock
+docker run --mount type=bind,source=/{absolute path}/routing_config.yml,target=/service/routing_rule.yml -p 8100:8100 wenys/generalmock
 ```
 Make 'routing_config.yml' with below rules.
 
