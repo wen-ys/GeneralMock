@@ -27,4 +27,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag generalmock:${RELEASE_VERSION} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
-      run: docker push generalmock:${RELEASE_VERSION}
+      run: docker push wenys/generalmock:${RELEASE_VERSION}
