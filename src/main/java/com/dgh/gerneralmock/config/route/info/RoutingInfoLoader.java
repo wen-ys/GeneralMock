@@ -26,7 +26,7 @@ public abstract class RoutingInfoLoader {
             loadFromInputStream(is);
         } catch (RuntimeException | IOException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException(e.getCause());
+            throw new IllegalArgumentException(String.format("'%s' : Config file not found", value));
         }
     }
 

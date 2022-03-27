@@ -1,6 +1,12 @@
 # General Mock
 Basically return 'Status code 200 / OK' regarding ALL requests without custom setting.
 
+## Mock run with custom option file
+```shell
+docker run --mount type=bind,source=/{absolute path}/routing_config.yml,target=/service/routing_rule.yml -p 8100:8100 generalmock
+```
+Make 'routing_config.yml' with below rules.
+
 ## Mock custom configuration
 
 - path: Path for custom routing

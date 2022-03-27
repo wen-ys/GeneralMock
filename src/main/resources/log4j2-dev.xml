@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+
+    <Properties>
+        <Property name="LOG_PATH">/var/log/generalmock</Property>
+        <Property name="LOG_FILE_NAME_ACCESS">/access</Property>
+        <Property name="LOG_FILE_NAME_ERROR">/error</Property>
+        <Property name="LOG_PATTERN">%d{yyyy-MM-dd} HH:mm:ss.SSS} log4j2 %m%n</Property>
+        <Property name="ACCESS_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} trx=%X{traceId:-};span=%X{spanId:-};%m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="accessLog" fileName="${LOG_PATH}${LOG_FILE_NAME_ACCESS}.log"
+                     filePattern="${LOG_PATH}${LOG_FILE_NAME_ACCESS}.%d{yyyy-MM-dd}_%i.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000"/> <!-- rolling file 1000  -->
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.dgh.gerneralmock.log.LoggingHandler" level="INFO" includeLocation="false" additivity="false">
+            <AppendRef ref="default"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>
