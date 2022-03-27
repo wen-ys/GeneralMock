@@ -22,9 +22,10 @@ jobs:
       with:
         username: ${{ secrets.docker_hub_id }}
         password: ${{ secrets.docker_hub_token }}
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: Build the Docker image
-      run: |
-        export TAG=$(git describe --tags --abbrev=0)
-        docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
+      run: docker build . --file Dockerfile --tag wenys/generalmock:${steps.get_version.outputs.VERSION} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
-      run: docker push wenys/generalmock:${TAG}
+      run: docker push wenys/generalmock:${steps.get_version.outputs.VERSION}
