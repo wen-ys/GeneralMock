@@ -26,11 +26,17 @@ routingPolicies:
           "title" : "queen"
         }
 
-  - path: "/test/local"
+  - path: "/test/404"
+    response:
+      code: 404
+      body: "Not Found"
+
+  - path: "/test/500"
+    response:
+      code: 500
+      body: "Internal error"
+
+  - path: "/test/ok"
     response:
       code: 200
-      body: |
-        {
-          "id" : "This is",
-          "name" : "Local"
-        }
+      body: "ok"

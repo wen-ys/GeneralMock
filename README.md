@@ -18,44 +18,61 @@ Make 'routing_config.yml' with below rules.
   - body : custom body data
 
 ```yml
-    - path: "/books/1"
-      filters:
-        - type: "DelayFilter"
-          args: |
-            {
-              "delayTime" : 2000,
-              "deltaTime": 1000
-            }
-      response:
-        code: 200
-        body: "Good"
-        
-    - path: "/books/2"
-      filters:
-        - type: "HeaderFilter"
-          args: |
-            {
-              "responseHeader" : "test"
-            }
-      response:
-        code: 200
-        body: |
+routingPolicies:
+  - path: "/books/1"
+    filters:
+      - type: "DelayFilter"
+        args: |
           {
-            "title" : "queen"
+            "delayTime" : 2000,
+            "deltaTime": 1000
           }
+    response:
+      code: 200
+      body: "Good"
+      
+  - path: "/books/2"
+    filters:
+      - type: "HeaderFilter"
+        args: |
+          {
+            "responseHeader" : "test"
+          }
+    response:
+      code: 200
+      body: |
+        {
+          "title" : "queen"
+        }
 
-    - path: "/test/404"
-      response:
-        code: 404
-        body: "Not Found"
+  - path: "/test/404"
+    response:
+      code: 404
+      body: "Not Found"
 
-    - path: "/test/500"
-      response:
-        code: 500
-        body: "Internal error"
+  - path: "/test/500"
+    response:
+      code: 500
+      body: "Internal error"
 
-    - path: "/test/ok"
-      response:
-        code: 200
-        body: "ok"
+  - path: "/test/ok"
+    response:
+      code: 200
+      body: "ok"
+```
+
+### Request result with above config
+```shell
+$ curl http://localhost:8100/books/1
+Good%
+$ curl http://localhost:8100/books/2
+{
+  "title" : "queen"
+}
+$ curl http://localhost:8100/test/404
+Not Found%
+$ curl http://localhost:8100/test/500
+Internal error%
+$ curl http://localhost:8100/test/ok
+ok%
 ```
