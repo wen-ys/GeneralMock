@@ -23,7 +23,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.dgh.gerneralmock.log.LoggingHandler" level="INFO" includeLocation="false" additivity="false">
+        <Logger name="com.wenys.gerneralmock.log.LoggingHandler" level="INFO" includeLocation="false" additivity="false">
             <AppendRef ref="default"/>
         </Logger>
     </Loggers>
