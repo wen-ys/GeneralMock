@@ -30,4 +30,7 @@ jobs:
     - name: Push Docker image
       env:
         TAG: ${{ steps.get_version.outputs.VERSION }}
-      run: docker push wenys/generalmock:${TAG}
+      run: |
+        docker push wenys/generalmock:${TAG}
+        docker tag push wenys/generalmock:${TAG} wenys/generalmock
+        docker push wenys/generalmock
