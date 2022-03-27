@@ -3,21 +3,28 @@ name: Docker Image CI
 on:
   push:
     branches: [ main ]
+    tags: '**'
   pull_request:
     branches: [ main ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-    timeout-minutes: 10
 
     steps:
     - uses: actions/checkout@v2
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
-    - id: gradle  
+    - id: gradle
       run: ./gradlew build
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.docker_hub_id }}
+        password: ${{ secrets.docker_hub_token }}
+    - name: Set env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag generalmock:$(date +%s) --build-arg JAR=$(ls build/libs/*.jar)
+      run: docker build . --file Dockerfile --tag generalmock:${RELEASE_VERSION} --build-arg JAR=$(ls build/libs/*.jar)
+    - name: Push Docker image
+      run: docker push generalmock:${RELEASE_VERSION}
