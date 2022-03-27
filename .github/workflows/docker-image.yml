@@ -28,7 +28,9 @@ jobs:
     - name: Build the Docker image
       env:
         TAG: ${{ steps.get_version.outputs.VERSION }}
-      run: docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
+      run: |
+        echo ${GITHUB_REF##*/}
+        docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
       env:
         TAG: ${{ steps.get_version.outputs.VERSION }}
