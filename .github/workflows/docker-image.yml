@@ -25,6 +25,8 @@ jobs:
     - name: Get the tag name
       run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
+      run: |
+        echo $TAG
+        docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
       run: docker push wenys/generalmock:${TAG}
