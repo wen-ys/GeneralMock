@@ -32,5 +32,5 @@ jobs:
         TAG: ${{ steps.get_version.outputs.VERSION }}
       run: |
         docker push wenys/generalmock:${TAG}
-        docker tag push wenys/generalmock:${TAG} wenys/generalmock
-        docker push wenys/generalmock
+        docker tag push wenys/generalmock:${TAG} wenys/generalmock:latest
+        docker push wenys/generalmock:latest
