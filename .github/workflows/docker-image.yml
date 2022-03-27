@@ -2,10 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
     tags: '**'
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
@@ -24,12 +21,11 @@ jobs:
         password: ${{ secrets.docker_hub_token }}
     - name: Get the version
       id: get_version
-      run: echo ::set-output name=VERSION::$(git describe --tags `git rev-list --tags --max-count=1`)
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: Build the Docker image
       env:
         TAG: ${{ steps.get_version.outputs.VERSION }}
       run: |
-        echo ${GITHUB_REF##*/}
         docker build . --file Dockerfile --tag wenys/generalmock:${TAG} --build-arg JAR=$(ls build/libs/*.jar)
     - name: Push Docker image
       env:
