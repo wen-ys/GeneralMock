@@ -14,7 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Binary build
-      run: chmod +x gradlew & ./gradlew build
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
+      with:
+        arguments: build
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag generalmock:$(date +%s) --build-arg JAR=$(ls build/libs/*.jar)
