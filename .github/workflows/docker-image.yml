@@ -11,12 +11,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
     - uses: actions/checkout@v2
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@937999e9cc2425eddc7fd62d1053baf041147db7
-      with:
-        arguments: build
+      uses: gradle/gradle-build-action@v2
+    - id: gradle  
+      run: ./gradlew build
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag generalmock:$(date +%s) --build-arg JAR=$(ls build/libs/*.jar)
