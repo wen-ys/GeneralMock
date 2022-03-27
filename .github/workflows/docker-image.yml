@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
-      with:
-        arguments: build
+    - id: gradle  
+      run: ./gradlew build
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag generalmock:$(date +%s) --build-arg JAR=$(ls build/libs/*.jar)
