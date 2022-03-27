@@ -65,7 +65,20 @@ routingPolicies:
 ```shell
 $ curl http://localhost:8100/books/1
 Good%
-$ curl http://localhost:8100/books/2
+$ curl -v http://localhost:8100/books/2
+*   Trying ::1:8100...
+* Connected to localhost (::1) port 8100 (#0)
+> GET /books/2 HTTP/1.1
+> Host: localhost:8100
+> User-Agent: curl/7.77.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< responseHeader: test
+< Content-Type: application/json
+< Content-Length: 24
+<
 {
   "title" : "queen"
 }
