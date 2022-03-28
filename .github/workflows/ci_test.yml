@@ -16,7 +16,7 @@ jobs:
     - name: Build with Gradle
       uses: gradle/gradle-build-action@v2
     - id: gradle
-      run: ./gradlew test jacocoTestReport
+      run: ./gradlew test
     - name: Report to CodeCov
       uses: codecov/codecov-action@v1
       with:
