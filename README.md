@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/wen-ys/GeneralMock/branch/main/graph/badge.svg?token=5MXZDBWQ3Q)](https://codecov.io/gh/wen-ys/GeneralMock)
+
 # General Mock
 Basically return 'Status code 200 / OK' regarding ALL requests without custom setting.
 
