@@ -5,6 +5,7 @@ import com.wenys.gerneralmock.config.route.Response;
 import com.wenys.gerneralmock.config.route.info.RoutingInfo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -25,8 +26,11 @@ public class RoutingHandler {
     }
 
     public Mono<ServerResponse> route(ServerRequest serverRequest) {
-        String path = serverRequest.exchange().getRequest().getPath().value();
-        log.info(path);
+        ServerHttpRequest serverHttpRequest = serverRequest.exchange().getRequest();
+        String path = serverHttpRequest.getPath().value();
+        String header = serverHttpRequest.getHeaders().toString();
+        String queryParam = serverHttpRequest.getQueryParams().toString();
+        log.info(String.format("Path: %s / QueryParam: %s / Header: %s", path, queryParam, header));
         ServerResponseBuilder serverResponseBuilder = new ServerResponseBuilder();
         Mono<ServerResponseBuilder> responseMono = Mono.just(serverResponseBuilder);
 

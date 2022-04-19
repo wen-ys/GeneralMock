@@ -14,6 +14,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	all {
+		exclude group:'org.springframework.boot', module:'spring-boot-starter-logging'
+	}
 }
 
 jar {
@@ -33,11 +36,16 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux:2.5.5'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.0'
+
 	implementation 'org.projectlombok:lombok:1.18.20'
 	implementation 'org.yaml:snakeyaml:1.29'
 	implementation 'org.json:json:20200518'
+
 	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
 	testImplementation 'io.projectreactor:reactor-test:3.4.10'
 }
