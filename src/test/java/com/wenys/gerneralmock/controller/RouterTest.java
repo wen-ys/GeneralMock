@@ -53,16 +53,29 @@ public class RouterTest {
     }
 
     @Test
-    @DisplayName("[ Routing - GET /test/500 ] 500 Internal error")
-    void routeInternalErrorResponseTest() {
+    @DisplayName("[ Routing - GET /books/1 ] With Param")
+    void routeWithParamResponseTest() {
 
         // When & Then
-        webTestClient.get().uri("/test/500")
+        webTestClient.get().uri("/books/1?number=1&isOn=on&number=2")
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
-                .expectStatus().is5xxServerError()
+                .expectStatus().isOk()
                 .expectBody(String.class)
-                .isEqualTo("Internal error");
+                .isEqualTo("Param Good");
+    }
+
+    @Test
+    @DisplayName("[ Routing - GET /books/1 ] no Param")
+    void routeNoParamResponseTest() {
+
+        // When & Then
+        webTestClient.get().uri("/books/1")
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(String.class)
+                .isEqualTo("no Param");
     }
 
 }

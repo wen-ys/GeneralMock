@@ -1,5 +1,27 @@
-
 routingPolicies:
+  - path: "/books/3"
+    response:
+      code: 200
+      body: "Good"
+
+  - path: "/books/1"
+    params:
+      number:
+        - "1"
+        - "2"
+      isOn:
+        - "on"
+    filters:
+      - type: "DelayFilter"
+        args: |
+          {
+            "delayTime" : 2000,
+            "deltaTime": 1000
+          }
+    response:
+      code: 200
+      body: "Good Param"
+
   - path: "/books/1"
     filters:
       - type: "DelayFilter"
@@ -10,7 +32,7 @@ routingPolicies:
           }
     response:
       code: 200
-      body: "Good"
+      body: "no Param"
 
   - path: "/books/2"
     filters:

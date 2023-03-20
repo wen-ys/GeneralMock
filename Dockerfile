@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11
 
-MAINTAINER Wenys <tjln0608@gmail.com>
+MAINTAINER wen-ys <tjln0608@gmail.com>
 
 ARG JAR
 ENV JAR_FILE_PATH=${JAR:-test}

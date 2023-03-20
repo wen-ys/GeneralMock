@@ -22,6 +22,12 @@ Make 'routing_config.yml' with below rules.
 ```yml
 routingPolicies:
   - path: "/books/1"
+    params:
+      number:
+        - "1"
+        - "2"
+      isOn:
+        - "on"
     filters:
       - type: "DelayFilter"
         args: |
@@ -31,8 +37,14 @@ routingPolicies:
           }
     response:
       code: 200
-      body: "Good"
-      
+      body: "Good Param"
+
+  - path: "/books/1"
+    filters:
+    response:
+      code: 200
+      body: "no Param"
+
   - path: "/books/2"
     filters:
       - type: "HeaderFilter"
@@ -46,21 +58,6 @@ routingPolicies:
         {
           "title" : "queen"
         }
-
-  - path: "/test/404"
-    response:
-      code: 404
-      body: "Not Found"
-
-  - path: "/test/500"
-    response:
-      code: 500
-      body: "Internal error"
-
-  - path: "/test/ok"
-    response:
-      code: 200
-      body: "ok"
 ```
 
 ### Request result with above config
