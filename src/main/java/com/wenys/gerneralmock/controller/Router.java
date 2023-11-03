@@ -20,6 +20,7 @@ public class Router {
                 .POST("/mock/load/local", mockOperation::loadLocalConfig)
                 .POST("/**", routingHandler::route)
                 .GET("/**", routingHandler::route)
+                .PUT("/**", routingHandler::route)
                 .build();
     }
 
